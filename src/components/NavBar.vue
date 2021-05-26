@@ -1,12 +1,14 @@
 <template>
   <div>
-    <h1>CDE</h1>
+    <h1>NETFLIX</h1>
+    <input type="text">
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Home'
+  name: 'NavBar'
+
 }
 </script>
 
