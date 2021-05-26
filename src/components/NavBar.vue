@@ -29,6 +29,7 @@ export default {
   methods:{
     startSearch(){
       this.$emit("searchContent", this.stringToSearch) // . scateno l'evento searchcont gli passo come param la stringa da cercare
+      this.stringToSearch = ''
     }
   },
 }
