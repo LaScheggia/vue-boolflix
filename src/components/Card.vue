@@ -4,6 +4,17 @@
       <ul>
         <li>
           {{card.title}}
+          <ul>
+            <li>
+              {{card.original_title}}
+            </li>
+            <li>
+              {{card.original_language}}
+            </li>
+            <li>
+              {{card.vote_average}}
+            </li>
+          </ul>
         </li>
       </ul>
     </h3>
