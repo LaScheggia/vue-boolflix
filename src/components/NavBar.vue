@@ -1,5 +1,5 @@
 <template>
-  <form action="">
+  <form class="d-flex mb-5 mt-5">
     <div>
       <input 
       type="text"
