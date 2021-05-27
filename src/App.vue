@@ -1,13 +1,12 @@
 <template>
   <div id="app">
     <nav-bar 
-    @searchContent="searching"/>
+    @searchContent="searching"/> <!-- qua chiamo  -->
 
     <card 
     v-for="card in cards"
     :key = "card.id"
     :card = "card"/>
-
 
   </div>
 </template>
@@ -26,7 +25,7 @@ export default {
   },
   data(){
     return {
-      apiURL: 'https://api.themoviedb.org/3/search/movie',
+      apiURL: 'https://api.themoviedb.org/3/search/',
       apiKey: '72a47c3d7a59cd274a9948bdbfc3cd98',
       cards: [],
     }
@@ -38,21 +37,22 @@ export default {
     // . mi serve per valorizzare il mio textToSeacrh x la ricerca
     // . testo che cerchiamo dentro tutti gli elementi
     // . di default è vuota e cambia quando la andiamo a valorizzare facendogli passare il nostro evento custom
-    searching(text){
-      axios.get(this.apiURL,{
+    searching(object){ 
+      axios.get(this.apiURL+object.type,{ 
         params:{
           api_key: this.apiKey,
-          query: text,
+          query: object.text, 
           languages: 'it-IT'
         }
       }).then(resp=> {
-        this.cards = resp.data.results;
+        this.cards = resp.data.results; 
         console.log(resp.data.results);
       })
       .catch(err => {
         console.log(err);
       })
     }
+
   },
   computed: {
 
