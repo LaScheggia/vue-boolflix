@@ -1,13 +1,17 @@
 <template>
   <div id="app">
     <nav-bar 
-    @searchContent="searching"/> <!-- qua chiamo  -->
+    @searchContent="start"/> <!-- qua chiamo  -->
 
     <card 
-    v-for="card in cards"
+    v-for="card in scheda.movie"
     :key = "card.id"
     :card = "card"/>
 
+    <card 
+    v-for="card in scheda.tv"
+    :key = "card.id"
+    :card = "card"/>
   </div>
 </template>
 
@@ -15,9 +19,6 @@
 import axios from 'axios'
 import NavBar from './components/NavBar.vue'
 import Card from './components/Card.vue'
-
-
-
 
 export default {
   name: 'App',
@@ -29,7 +30,11 @@ export default {
     return {
       apiURL: 'https://api.themoviedb.org/3/search/',
       apiKey: '72a47c3d7a59cd274a9948bdbfc3cd98',
-      cards: [],
+      scheda: {
+        'movie': [],
+        'tv': []
+      }
+
     }
   },
   created(){
@@ -39,20 +44,31 @@ export default {
     // . mi serve per valorizzare il mio textToSeacrh x la ricerca
     // . testo che cerchiamo dentro tutti gli elementi
     // . di default è vuota e cambia quando la andiamo a valorizzare facendogli passare il nostro evento custom
-    searching(object){ 
-      axios.get(this.apiURL+object.type,{ 
+    searching(text, type){ 
+      axios.get(this.apiURL+type,{ 
         params:{
           api_key: this.apiKey,
-          query: object.text, 
-          languages: 'it-IT'
+          query: text, 
+          language: 'it-IT'
         }
       }).then(resp=> {
-        this.cards = resp.data.results; 
+        this.scheda[type] = resp.data.results; 
         console.log(resp.data.results);
       })
       .catch(err => {
         console.log(err);
       })
+    },
+
+    start(obj){
+      this.scheda.movie = [];
+      this.scheda.tv = [];
+      if (obj.type === 'all'){
+        this.searching(obj.text, 'movie');
+        this.searching(obj.text, 'tv');
+      } else {
+        this.searching(obj.text, obj.type);
+      }
     }
 
   },
@@ -64,6 +80,7 @@ export default {
 
 <style lang="scss">
 @import '@/assets/style/general.scss'
+
 
 
 </style>

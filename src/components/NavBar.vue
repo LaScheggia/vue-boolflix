@@ -1,7 +1,8 @@
 <template>
-  <form class="d-flex mb-5 mt-5">
+  <form class="d-flex flex-grow-5 mb-5">
     <div>
       <input 
+      
       type="text"
       v-model.trim="stringToSearch"
       placeholder="Search..."
@@ -9,6 +10,7 @@
     </div>
     <div>
       <button
+      class="btn btn-danger"
       @click.prevent='$emit("searchContent", {text: stringToSearch, type: "movie"})'
       > 
         Search movie
@@ -16,6 +18,7 @@
     </div>
     <div>
       <button
+      class="btn btn-danger"
       @click.prevent='$emit("searchContent", {text: stringToSearch, type: "tv"})'
       > 
         Search Tv serie
@@ -23,6 +26,7 @@
     </div>
     <div>
       <button
+      class="btn btn-danger"
       @click.prevent='$emit("searchContent", {text: stringToSearch, type: "all"})'
       > 
         Search both
@@ -49,6 +53,10 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+form{
+  background-color: grey;
+}
+
 
 </style>
