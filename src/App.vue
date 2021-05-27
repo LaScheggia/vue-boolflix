@@ -15,8 +15,6 @@
 import axios from 'axios'
 import NavBar from './components/NavBar.vue'
 import Card from './components/Card.vue'
-import FlagIcon from '~/vue-flag-icon'
-Vue.use(FlagIcon);
 
 /* Vue.component('country-flag', CountryFlag) */
 
