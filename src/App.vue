@@ -16,7 +16,7 @@ import axios from 'axios'
 import NavBar from './components/NavBar.vue'
 import Card from './components/Card.vue'
 
-/* Vue.component('country-flag', CountryFlag) */
+
 
 
 export default {
@@ -63,7 +63,7 @@ export default {
 </script>
 
 <style lang="scss">
-/* @import '@/assets/styles/general.css'
- */
+@import '@/assets/style/general.scss'
+
 
 </style>
