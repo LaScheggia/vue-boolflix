@@ -23,7 +23,7 @@
     </div>
     <div>
       <button
-      @click.prevent='$emit("searchContent", {text: stringToSearch, type: ""})'
+      @click.prevent='$emit("searchContent", {text: stringToSearch, type: "all"})'
       > 
         Search both
       </button>
