@@ -1,6 +1,6 @@
 <template>
-  <div class="scheda">
-      <ul>
+  <div class="d-flex scheda ">
+      <ul class="d-flex flex-wrap">
         <li> <!-- NOME FILM -->
           {{card.title || card.name}} <!-- se metto \\ e card.qualcosa stampa una se non c'è l'altra -->
           <ul> <!-- ALTRI DATI FILM    -->
@@ -45,14 +45,13 @@ export default {
   },
   methods: {
 /*     transformIso(){
-      if (this.card.original_language === 'ja'){
-        this.card.original_language === 'jp'
-      } else if (this.card.original_language === 'en'){
-        this.card.original_language === 'gb'
+      if (this.card.original_language === 'en'){
+        return = 'gb'
+      } else if (this.card.original_language === 'ja'){
+        return = 'jp'
       } else {
-        this.card.original_language === this.card.original_language
+        return this.card.original_language
       }
-      return this.card.original_language
     } */
   }
 
@@ -60,6 +59,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .stars{
   display: inline-block;
 }
