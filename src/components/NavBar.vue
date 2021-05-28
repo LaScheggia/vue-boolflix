@@ -1,5 +1,5 @@
 <template>
-  <form class="d-flex flex-grow-5 mb-5">
+  <form class="d-flex flex-grow-5">
     <div>
       <input 
       
@@ -55,7 +55,8 @@ export default {
 
 <style lang="scss" scoped>
 form{
-  background-color: grey;
+  background-color: black;
+  margin: 0;
 }
 
 

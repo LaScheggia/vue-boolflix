@@ -3,16 +3,23 @@
     <nav-bar 
     @searchContent="start"/> <!-- qua chiamo  -->
 
+    <h1 v-if="this.scheda.movie.length > 0"> 
+      Film trovati
+    </h1>
     <card 
     v-for="card in scheda.movie"
     :key = "card.id"
     :card = "card"/>
 
+    <h1 v-if="this.scheda.tv.length > 0"> 
+      Serie Tv trovate
+    </h1>
     <card 
     v-for="card in scheda.tv"
     :key = "card.id"
     :card = "card"/>
   </div>
+
 </template>
 
 <script>
@@ -79,7 +86,13 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@/assets/style/general.scss'
+@import '@/assets/style/general.scss';
+@import '@/assets/style/vars.scss';
+
+h1{
+  color: $netfl-color;
+}
+
 
 
 
