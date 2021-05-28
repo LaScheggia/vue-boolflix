@@ -2,34 +2,34 @@
   <div class="card-holder">
     <div class="flip-card">
       <div class="flip-card-inner">
-        <div class="flip-card-front">
-          <img v-if="card.poster_path != null" :src=" 'http://image.tmdb.org/t/p/w342' + card.poster_path " :alt='card.overview' style="width:180px;height:320px;">
-          <img v-else src="http://placehold.jp/180x320.png" alt="img-placeholder">
-        </div>
-        <div class="flip-card-back">
-          <h6>{{card.title || card.name}}</h6>
-          <p>{{card.original_title || card.original_name}}</p>
-          <div
-            class="stars"
-            v-for="index in 5"
-            :key="index">
-              <i class="fas fa-star"
-              v-if="index < Math.round(card.vote_average/2)"></i>
-              <i 
-              class="far fa-star"
-              v-else></i>
-          </div>
-            <!-- <flag :iso="transformIso()"/>  -->
-          <flag :iso="card.original_language === 'en' ? 'gb' : card.original_language"/> 
-          <p class="fw-light">{{card.overview}}</p>
-        </div>
+            <div class="flip-card-front">
+              <img v-if="card.poster_path != null" :src=" 'http://image.tmdb.org/t/p/w342' + card.poster_path " :alt='card.overview' style="width:180px;height:320px;">
+              <img v-else src="http://placehold.jp/180x320.png" alt="img-placeholder">
+            </div>
+            <div class="flip-card-back">
+              <h6>{{card.title || card.name}}</h6>
+              <p>{{card.original_title || card.original_name}}</p>
+              <div
+                class="stars"
+                v-for="index in 5"
+                :key="index">
+                  <i class="fas fa-star"
+                  v-if="index < Math.round(card.vote_average/2)"></i>
+                  <i 
+                  class="far fa-star"
+                  v-else></i>
+              </div>
+              <flag :iso="transformIso()"/> 
+              <!-- <flag :iso="card.original_language === 'en' ? 'gb' : card.original_language"/>  -->
+              <p class="fw-light">{{card.overview}}</p>
+            </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-/* Vue.use(FlagIcon); */
+
 
 export default {
   name: 'Card',
@@ -42,15 +42,15 @@ export default {
     }
   },
   methods: {
-/*     transformIso(){
+    transformIso(){
       if (this.card.original_language === 'en'){
-        return = 'gb'
+        this.card.original_language = 'gb'
       } else if (this.card.original_language === 'ja'){
-        return = 'jp'
+        this.card.original_language = 'jp'
       } else {
         return this.card.original_language
       }
-    } */
+    }
   }
 
 }
