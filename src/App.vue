@@ -4,7 +4,7 @@
 
   <div id="app" class="container"> <!-- ciò che contiene todos -->
 
-    <div v-if="!loading">
+    <div v-if="!Loading">
       <nav-bar 
       @searchContent="start"/> <!-- qua chiamo  -->
 
@@ -21,8 +21,9 @@
         :key = "card.id"
         :card = "card"/>
       </div>
+      <not-found v-else/>
 
-      <div v-if="this.scheda.lenght < 0">
+      <div>
         <!-- risultati di movie -->
         <h1 v-if="this.scheda.movie.length > 0"> Movies </h1>
         <card 
@@ -37,8 +38,6 @@
         :key = "card.id"
         :card = "card"/>
       </div>
-      <not-found v-else/>
-
 
     </div>
 
@@ -75,11 +74,12 @@ export default {
       apiURL: 'https://api.themoviedb.org/3/search/',
       apiKey: '72a47c3d7a59cd274a9948bdbfc3cd98',
       Loading: true,
+      NotFound: false,
       scheda: {
         'movie': [],
         'tv': [],
         'popMovies': [],
-        'popTvs:': []
+        'popTvs': []
       },
     }
   },
@@ -113,7 +113,11 @@ export default {
     .catch(err => {
       console.log(err);
     })
-    },
+  },
+
+  mounted: {
+    
+  },
 
   /* METHODS */
   methods: {
