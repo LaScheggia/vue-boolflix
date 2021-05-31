@@ -1,43 +1,47 @@
 <template>
-  <form class="d-flex flex-grow-5 justify-content-center align-items-center">
-    <a href="/">
-      <img src="@/assets/img/logo_small.png" alt="">
-    </a>
-    <div>
-      <input 
-      type="text"
-      class="form-control"
-      v-model.trim="stringToSearch"
-      placeholder="What do you wanna see tonight?"
-      >
+
+<div class="">
+
+  <div class="row">
+
+    <div class="col text-start">
+      <a href="/"> <!-- redirecting in home -->
+        <img src="@/assets/img/logo_small.png" alt="">
+      </a>
     </div>
 
+    <div class="col text-center">
+        <input
+        id = "input" 
+        type="text"
+        class="form-control"
+        v-model.trim="stringToSearch"
+        placeholder="What do you wanna see tonight?"
+        >
+    </div>
+
+    <div class="col text-end">
       <button
       class="btn btn-sm red"
       @click.prevent='$emit("searchContent", {text: stringToSearch, type: "movie"})'
-      > 
-        Film
+      > Film
       </button>
-
-    
 
       <button
       class="btn btn-sm red"
       @click.prevent='$emit("searchContent", {text: stringToSearch, type: "tv"})'
-      > 
-        Tv Serie
+      > Tv Serie
       </button>
-
-
 
       <button
       class="btn btn-sm red"
       @click.prevent='$emit("searchContent", {text: stringToSearch, type: "all"})'
-      > 
-        I feel lucky
+      > I feel lucky
       </button>
+    </div>
+  </div>
 
-  </form>
+</div>
 
 </template>
 
@@ -74,6 +78,7 @@ img{
 ::placeholder{
   font-size: 0.70em;
 }
+
 
 .btn{
     border: none;

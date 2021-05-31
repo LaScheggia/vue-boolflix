@@ -15,6 +15,7 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/style/vars.scss';
 
+/* NETFLIX STYLE LOADER */
 @function makelongshadow($length,$angle) {
 $val: 0px 0px transparent;
 @for $i from 1 through $length {
