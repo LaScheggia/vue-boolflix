@@ -1,8 +1,12 @@
 <template>
   <form class="d-flex flex-grow-5 justify-content-center align-items-center">
+    <a href="/">
+      <img src="@/assets/img/logo_small.png" alt="">
+    </a>
     <div>
       <input 
       type="text"
+      class="form-control"
       v-model.trim="stringToSearch"
       placeholder="What do you wanna see tonight?"
       >
@@ -60,6 +64,11 @@ export default {
 form{
   background-color: black;
   margin: 0;
+}
+
+img{
+  height: 50px;
+  width: 150px;
 }
 
 ::placeholder{

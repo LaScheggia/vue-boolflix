@@ -9,6 +9,31 @@
       <nav-bar 
       @searchContent="start"/> <!-- qua chiamo  -->
 
+
+      <div v-if="this.scheda.movie.length < 1 && this.scheda.tv.length < 1">
+      <h1> 
+        Film Popolari
+      </h1>
+      <card 
+      v-for="card in scheda.popMovies"
+      :key = "card.id"
+      :card = "card"/>
+
+      <h1> 
+        Serie Popolari
+      </h1>
+      <card 
+      v-for="card in scheda.popTvs"
+      :key = "card.id"
+      :card = "card"/>
+
+      </div>
+
+
+
+
+
+
       <h1 v-if="this.scheda.movie.length > 0"> 
         Film trovati
       </h1>
@@ -56,7 +81,9 @@ export default {
       apiKey: '72a47c3d7a59cd274a9948bdbfc3cd98',
       scheda: {
         'movie': [],
-        'tv': []
+        'tv': [],
+        'popMovies': [],
+        'popTvs:': []
       },
       Loading: true,
 
@@ -64,6 +91,36 @@ export default {
     }
   },
   created(){
+    let type = 'popMovies'
+    axios.get('https://api.themoviedb.org/3/movie/popular',{
+          params:{
+            api_key: this.apiKey,
+            language: 'it-IT'
+          }
+        })
+        .then(res => {
+           this.scheda[type] = res.data.results;
+
+        })
+        .catch(err => {
+          console.log(err);
+        })
+
+    let typetv = 'popTvs'
+    axios.get('https://api.themoviedb.org/3/tv/popular',{
+          params:{
+            api_key: this.apiKey,
+            language: 'it-IT'
+          }
+        })
+        .then(res => {
+           this.scheda[typetv] = res.data.results;
+
+        })
+        .catch(err => {
+          console.log(err);
+        })
+
     },
   methods: {
     // . funzione richiamata da evento custom riceve come param il testo da cercare

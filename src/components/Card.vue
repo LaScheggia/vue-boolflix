@@ -1,5 +1,5 @@
 <template>
-  <div class="card-holder">
+  <div class="card-holder" v-if="card.poster_path != null"> <!-- nascondo quelle che non hanno immagini -->
     <div class="flip-card">
       <div class="flip-card-inner">
             <div class="flip-card-front">
