@@ -4,11 +4,15 @@
 
   <div id="app" class="container"> <!-- ciò che contiene todos -->
 
-    <div v-if="!Loading">
+    <div v-if="!flag">
       <nav-bar 
-      @searchContent="start"/> <!-- qua chiamo  -->
+      @searchContent="start"
+      :movie="scheda.movie"
+      :tv="scheda.tv"
+      /> <!-- qua chiamo  -->
+      <not-found  v-if="this.tvMissing == true"/>
 
-      <div v-if="this.scheda.movie.length < 1 && this.scheda.tv.length < 1"> <!-- faccio vedere i popolari se nex cerca -->
+      <div v-if="this.scheda.movie.length == 0 && this.scheda.tv.length == 0"> <!-- faccio vedere i popolari se nex cerca -->
         <h1> Popular Movies </h1>
         <card 
         v-for="card in scheda.popMovies"
@@ -21,7 +25,6 @@
         :key = "card.id"
         :card = "card"/>
       </div>
-      <not-found v-else/>
 
       <div>
         <!-- risultati di movie -->
@@ -30,14 +33,16 @@
         v-for="card in scheda.movie"
         :key = "card.id"
         :card = "card"/>
+        
 
         <!-- risultati di serie tv -->
-        <h1 v-if="this.scheda.tv.length > 0"> Tv Series </h1>
+        <h1 v-if="this.scheda.tv.length > 0 && this.tvMissing == false"> Tv Series </h1>
         <card 
         v-for="card in scheda.tv"
         :key = "card.id"
         :card = "card"/>
       </div>
+      
 
     </div>
 
@@ -58,7 +63,6 @@ import Loading from './Loading.vue'
 import NotFound from './components/NotFound.vue'
 
 
-
 export default {
   name: 'App',
   components: {
@@ -73,7 +77,7 @@ export default {
     return {
       apiURL: 'https://api.themoviedb.org/3/search/',
       apiKey: '72a47c3d7a59cd274a9948bdbfc3cd98',
-      Loading: true,
+      flag: true,
       NotFound: false,
       scheda: {
         'movie': [],
@@ -81,6 +85,7 @@ export default {
         'popMovies': [],
         'popTvs': []
       },
+      tvMissing: false,
     }
   },
 
@@ -95,6 +100,7 @@ export default {
     })
     .then(res => {
       this.scheda[type] = res.data.results;
+      this.flag = false
     })
     .catch(err => {
       console.log(err);
@@ -109,15 +115,15 @@ export default {
     })
     .then(res => {
       this.scheda[typetv] = res.data.results;
+      this.flag = false
     })
     .catch(err => {
       console.log(err);
     })
+
   },
 
-  mounted: {
-    
-  },
+
 
   /* METHODS */
   methods: {
@@ -134,7 +140,7 @@ export default {
         }
       }).then(resp=> {
         this.scheda[type] = resp.data.results; 
-        console.log(resp.data.results);
+        this.flag = false
       })
       .catch(err => {
         console.log(err);
@@ -150,6 +156,11 @@ export default {
       } else {
         this.searching(obj.text, obj.type);
       }
+    },
+
+    status404tv(flag){
+      this.tvMissing = flag
+      console.log('stocazzo')
     }
 
   },

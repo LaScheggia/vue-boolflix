@@ -4,7 +4,7 @@
       <div class="flip-card-inner">
         <div class="flip-card-front">
           <img v-if="card.poster_path != null" :src=" 'http://image.tmdb.org/t/p/w342' + card.poster_path " :alt='card.overview' style="width:180px;height:320px;">
-          <img v-else src="http://placehold.jp/180x320.png" alt="img-placeholder">
+          <img v-else src="http://placehold.jp/180x320.png" alt="img-placeholder"> <!-- metto delle img fuffa x mettere la copertina -->
         </div>
         <div class="flip-card-back">
           <h6>{{card.title || card.name}}</h6>
