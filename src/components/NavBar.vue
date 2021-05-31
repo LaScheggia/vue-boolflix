@@ -1,37 +1,38 @@
 <template>
-  <form class="d-flex flex-grow-5">
+  <form class="d-flex flex-grow-5 justify-content-center align-items-center">
     <div>
       <input 
-      
       type="text"
       v-model.trim="stringToSearch"
-      placeholder="Search..."
+      placeholder="What do you wanna see tonight?"
       >
     </div>
-    <div>
+
       <button
-      class="btn btn-danger"
+      class="btn btn-sm red"
       @click.prevent='$emit("searchContent", {text: stringToSearch, type: "movie"})'
       > 
-        Search movie
+        Film
       </button>
-    </div>
-    <div>
+
+    
+
       <button
-      class="btn btn-danger"
+      class="btn btn-sm red"
       @click.prevent='$emit("searchContent", {text: stringToSearch, type: "tv"})'
       > 
-        Search Tv serie
+        Tv Serie
       </button>
-    </div>
-    <div>
+
+
+
       <button
-      class="btn btn-danger"
+      class="btn btn-sm red"
       @click.prevent='$emit("searchContent", {text: stringToSearch, type: "all"})'
       > 
-        Search both
+        I feel lucky
       </button>
-    </div>
+
   </form>
 
 </template>
@@ -54,10 +55,52 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/style/vars.scss';
+
 form{
   background-color: black;
   margin: 0;
 }
 
+::placeholder{
+  font-size: 0.70em;
+}
 
+.btn{
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    text-transform: uppercase;
+    padding-bottom: 15px;
+    position: relative;
+    background-image: linear-gradient(to top, #262626 0px, #404040 10px, #262626 10px, #333 100%);
+}
+.btn:hover{
+    color: #fff;
+}
+.btn:after{
+  content: "";
+  width: 0;
+  height: 10px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-radius: 0 0 5px 5px;
+  transition: all 0.35s ease 0s;
+}
+.btn:hover:after{
+  width: 100%;
+}
+
+.btn.btn-sm{
+  padding-bottom: 10px;
+  background-image: linear-gradient(to top, #262626 0px, #404040 8px, #262626 8px, #333 100%);
+}
+.btn.btn-sm:after{
+  height: 8px;
+}
+
+.btn.red:after{
+  background: $netfl-color;
+}
 </style>

@@ -1,24 +1,36 @@
 <template>
+
+
+
   <div id="app">
-    <nav-bar 
-    @searchContent="start"/> <!-- qua chiamo  -->
 
-    <h1 v-if="this.scheda.movie.length > 0"> 
-      Film trovati
-    </h1>
-    <card 
-    v-for="card in scheda.movie"
-    :key = "card.id"
-    :card = "card"/>
+    <div v-if="!loading">
 
-    <h1 v-if="this.scheda.tv.length > 0"> 
-      Serie Tv trovate
-    </h1>
-    <card 
-    v-for="card in scheda.tv"
-    :key = "card.id"
-    :card = "card"/>
+      <nav-bar 
+      @searchContent="start"/> <!-- qua chiamo  -->
+
+      <h1 v-if="this.scheda.movie.length > 0"> 
+        Film trovati
+      </h1>
+      <card 
+      v-for="card in scheda.movie"
+      :key = "card.id"
+      :card = "card"/>
+
+      <h1 v-if="this.scheda.tv.length > 0"> 
+        Serie Tv trovate
+      </h1>
+      <card 
+      v-for="card in scheda.tv"
+      :key = "card.id"
+      :card = "card"/>
+    </div>
+
+    <loading v-else/>
+
+
   </div>
+
 
 </template>
 
@@ -26,6 +38,8 @@
 import axios from 'axios'
 import NavBar from './components/NavBar.vue'
 import Card from './components/Card.vue'
+import Loading from './Loading.vue'
+
 
 
 export default {
@@ -33,6 +47,8 @@ export default {
   components: {
     NavBar,
     Card,
+    Loading,
+
   },
   data(){
     return {
@@ -41,7 +57,9 @@ export default {
       scheda: {
         'movie': [],
         'tv': []
-      }
+      },
+      Loading: true,
+
 
     }
   },
