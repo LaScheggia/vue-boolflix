@@ -86,6 +86,7 @@ export default {
         'popTvs': []
       },
       tvMissing: false,
+      movieMissing: false,
     }
   },
 
@@ -100,6 +101,16 @@ export default {
     })
     .then(res => {
       this.scheda[type] = res.data.results;
+      if(res.data.results.length === 0){
+        if(type === 'tv'){
+          this.tvMissing = true
+        } else if (type === 'movie'){
+          this.movieMissing = true
+        }  // todo FINIRE QUESTO STATO DI 404
+      } else{
+        this.tvMissing = false  // ? faccio un if in modo che se la lunghezza dell'array è pari a 0 
+        this.movieMissing = false // ? lui mi darà un 404 not found 
+      }
       this.flag = false
     })
     .catch(err => {

@@ -29,7 +29,7 @@
 
       <button
       class="btn btn-sm red"
-      @click.prevent='$emit("searchContent", {text: stringToSearch, type: "tv"}), notFound()'
+      @click.prevent='$emit("searchContent", {text: stringToSearch, type: "tv"})'
       
       > Tv Serie
       </button>
@@ -59,11 +59,7 @@ export default {
       // . scateno l'evento searchcont gli passo come param la stringa da cercare
       this.stringToSearch = ''
     }, // x passare più cose nell'emit uso {text:textToSearch, type: ''}
-    notFound(){
-      console.log('abc');
-      if (this.tv.lenght === 0)
-      return this.$emit("status404tv", true); // ! l'errore è qua
-    }
+
   },
   props: {
     movie: Array,
