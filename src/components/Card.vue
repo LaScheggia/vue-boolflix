@@ -42,7 +42,7 @@ export default {
     }
   },
   methods: {
-    transformIso(){
+    transformIso(){ // funzioncina che sistema alcune bandiere non "riconosciute" perché usaiamo la lingua e non l'iso
       if (this.card.original_language === 'en'){
         this.card.original_language = 'gb'
       } else if (this.card.original_language === 'ja'){
@@ -97,6 +97,7 @@ export default {
 } 
 
 .flip-card-back {
+  padding: 5px;
   height: 320px;
   background-color: rgb(26, 28, 25);
   color: white;

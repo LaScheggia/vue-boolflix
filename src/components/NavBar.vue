@@ -37,7 +37,7 @@
       <button
       class="btn btn-sm red"
       @click.prevent='$emit("searchContent", {text: stringToSearch, type: "all"})'
-      > I feel lucky
+      > Let the cat pick
       </button>
     </div>
   </div>

@@ -10,7 +10,7 @@
       :movie="scheda.movie"
       :tv="scheda.tv"
       /> <!-- qua chiamo  -->
-      <not-found  v-if="this.tvMissing == true"/>
+      
 
       <div v-if="this.scheda.movie.length == 0 && this.scheda.tv.length == 0"> <!-- faccio vedere i popolari se nex cerca -->
         <h1> Popular Movies </h1>
@@ -26,28 +26,30 @@
         :card = "card"/>
       </div>
 
-      <div>
+      <not-found  v-if="this.movieMissing == true"/>
+      <not-found  v-if="this.tvMissing == true"/>
+
+      <div> <!-- qua ci sono i risultati della mia ricerca divisi x film e serie -->
         <!-- risultati di movie -->
-        <h1 v-if="this.scheda.movie.length > 0"> Movies </h1>
-        <card 
-        v-for="card in scheda.movie"
-        :key = "card.id"
-        :card = "card"/>
-        
+          <h1 v-if="this.scheda.movie.length > 0"> Movies </h1>
+          <card 
+          v-for="card in scheda.movie"
+          :key = "card.id"
+          :card = "card"/>
 
         <!-- risultati di serie tv -->
-        <h1 v-if="this.scheda.tv.length > 0 && this.tvMissing == false"> Tv Series </h1>
-        <card 
-        v-for="card in scheda.tv"
-        :key = "card.id"
-        :card = "card"/>
+          <h1 v-if="this.scheda.tv.length > 0 "> Tv Series </h1>
+          <card 
+          v-for="card in scheda.tv"
+          :key = "card.id"
+          :card = "card"/>
       </div>
-      
-
     </div>
 
     <!-- loading se l'api ci mette un po' -->
     <loading v-else/>
+
+    <credits/>
 
 
   </div>
@@ -61,6 +63,8 @@ import NavBar from './components/NavBar.vue'
 import Card from './components/Card.vue'
 import Loading from './Loading.vue'
 import NotFound from './components/NotFound.vue'
+import Credits from './components/Credits.vue'
+
 
 
 export default {
@@ -70,6 +74,8 @@ export default {
     Card,
     Loading,
     NotFound,
+    Credits,
+
   },
 
   /* DATA */
@@ -78,7 +84,6 @@ export default {
       apiURL: 'https://api.themoviedb.org/3/search/',
       apiKey: '72a47c3d7a59cd274a9948bdbfc3cd98',
       flag: true,
-      NotFound: false,
       scheda: {
         'movie': [],
         'tv': [],
@@ -100,16 +105,16 @@ export default {
       }
     })
     .then(res => {
-      this.scheda[type] = res.data.results;
-      if(res.data.results.length === 0){
-        if(type === 'tv'){
-          this.tvMissing = true
-        } else if (type === 'movie'){
-          this.movieMissing = true
-        }  // todo FINIRE QUESTO STATO DI 404
+      this.scheda[type] = res.data.results;        // todo FINIRE QUESTO STATO DI 404
+      if(res.data.results.length === 0){  // ? faccio un if in modo che se la lunghezza dell'array è pari a 0 
+        if(type === 'tv'){                // ? lui mi darà un 404 not found
+          this.tvMissing = true           
+        } else if (type === 'movie'){  
+          this.movieMissing = true        
+        }                                 
       } else{
-        this.tvMissing = false  // ? faccio un if in modo che se la lunghezza dell'array è pari a 0 
-        this.movieMissing = false // ? lui mi darà un 404 not found 
+        this.tvMissing = false  
+        this.movieMissing = false 
       }
       this.flag = false
     })
@@ -187,8 +192,5 @@ h1{
   color: $netfl-color;
   text-shadow: 2px 2px $netfl-sec-color;
 }
-
-
-
 
 </style>
