@@ -75,7 +75,6 @@ export default {
     Loading,
     NotFound,
     Credits,
-
   },
 
   /* DATA */
@@ -105,17 +104,7 @@ export default {
       }
     })
     .then(res => {
-      this.scheda[type] = res.data.results;        // todo FINIRE QUESTO STATO DI 404
-      if(res.data.results.length === 0){  // ? faccio un if in modo che se la lunghezza dell'array è pari a 0 
-        if(type === 'tv'){                // ? lui mi darà un 404 not found
-          this.tvMissing = true           
-        } else if (type === 'movie'){  
-          this.movieMissing = true        
-        }                                 
-      } else{
-        this.tvMissing = false  
-        this.movieMissing = false 
-      }
+      this.scheda[type] = res.data.results; 
       this.flag = false
     })
     .catch(err => {
@@ -136,7 +125,6 @@ export default {
     .catch(err => {
       console.log(err);
     })
-
   },
 
 
@@ -148,6 +136,8 @@ export default {
     // . testo che cerchiamo dentro tutti gli elementi
     // . di default è vuota e cambia quando la andiamo a valorizzare facendogli passare il nostro evento custom
     searching(text, type){ 
+      this.movie = [],
+      this.tv = []
       axios.get(this.apiURL+type,{ 
         params:{
           api_key: this.apiKey,
@@ -173,14 +163,7 @@ export default {
         this.searching(obj.text, obj.type);
       }
     },
-
-    status404tv(flag){
-      this.tvMissing = flag
-      console.log('stocazzo')
-    }
-
   },
-
 }
 </script>
 
@@ -189,6 +172,7 @@ export default {
 @import '@/assets/style/vars.scss';
 
 h1{
+  margin-top: 25px;
   color: $netfl-color;
   text-shadow: 2px 2px $netfl-sec-color;
 }

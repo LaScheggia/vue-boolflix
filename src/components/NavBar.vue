@@ -24,20 +24,20 @@
       <button
       class="btn btn-sm red"
       @click.prevent='$emit("searchContent", {text: stringToSearch, type: "movie"})'
-      > Film
+      ><i class="fas fa-film"></i> Film
       </button>
 
       <button
       class="btn btn-sm red"
       @click.prevent='$emit("searchContent", {text: stringToSearch, type: "tv"})'
       
-      > Tv Serie
+      ><i class="fas fa-tv"></i> Tv Serie
       </button>
 
       <button
       class="btn btn-sm red"
       @click.prevent='$emit("searchContent", {text: stringToSearch, type: "all"})'
-      > Let the cat pick
+      ><i class="fas fa-paw"></i> Let the cat pick <i class="fas fa-paw"></i>
       </button>
     </div>
   </div>
